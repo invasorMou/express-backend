@@ -18,9 +18,17 @@ const logger = (req, res, next) => {
 
 app.use(logger)
 
+//ROUTERS
 app.use('/', home)
 app.use('/posts', posts)
 
-app.listen(port, host, backlog, () => {
+//Can you guess what is this doing?
+app.get('*', function(req, res){
+  res.send('what???', 404);
+});
+
+
+//SERVER
+app.listen(port, () => {
   console.log(`Backend app listening at http://localhost:${ port }`)
 })
