@@ -13,6 +13,11 @@ const postSchema = new Schema({
       required: true,
       minlength: 10,
     },
+		author: {
+			type: String,
+			required: true,
+			minlength: 3,
+		},
   },
   {
     timestamps: {
