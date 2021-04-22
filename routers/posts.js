@@ -40,7 +40,7 @@ router.put('/:id', function(req, res) {
 
 //DELETE AN EXISTING POST BY ID
 router.delete('/:id', function(req, res) {
-  Post.deleteOne({ id: req.params.id })
+  Post.findByIdAndDelete(req.params.id)
     .then(() => res.send('Post deleted'))
     .catch(err => res.json(err))
 })

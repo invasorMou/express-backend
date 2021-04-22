@@ -22,7 +22,7 @@ const logger = (req, res, next) => {
 app.use(logger)
 
 // MONGO
-const uri = process.env.ATLAS_URI
+const uri = 'your url to access you mongo database'
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
 const connection = mongoose.connection
