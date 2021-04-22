@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const mongoose = require('mongoose')
+
+require('dotenv').config()
 
 //ROUTERS
 let home = require('./routers/home')
@@ -17,6 +20,16 @@ const logger = (req, res, next) => {
 }
 
 app.use(logger)
+
+// MONGO
+const uri = 'your url to access you mongo database'
+mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
+
+const connection = mongoose.connection
+
+connection.once('open', () => {
+  console.log('MongoDB database connection established successfully')
+})
 
 //ROUTERS
 app.use('/', home)
