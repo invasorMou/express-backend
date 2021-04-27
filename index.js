@@ -1,12 +1,20 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const cors = require('cors')
+const port = 3001
+const mongoose = require('mongoose')
 
 //ROUTERS
 let home = require('./routers/home')
 let posts = require('./routers/posts')
 
 //MIDDLEWARES
+//Cors settings
+let corsOptions = {
+  origin: 'http://localhost:3000',
+}
+
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -17,6 +25,15 @@ const logger = (req, res, next) => {
 }
 
 app.use(logger)
+
+const dbUrl = 'mongodb+srv://mou:blogDB@myfirstcluster.ruhmc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+
+const connection = mongoose.connection
+
+connection.once('open', () => {
+  console.log('MongoDB connected')
+})
 
 //ROUTERS
 app.use('/', home)
