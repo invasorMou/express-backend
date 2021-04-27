@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const port = 3001
+const port = process.env.PORT
 const mongoose = require('mongoose')
 
 //ROUTERS
@@ -11,7 +11,7 @@ let posts = require('./routers/posts')
 //MIDDLEWARES
 //Cors settings
 let corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: process.env.FRONTENDURL,
 }
 
 app.use(cors(corsOptions))
@@ -26,7 +26,7 @@ const logger = (req, res, next) => {
 
 app.use(logger)
 
-const dbUrl = 'mongodb+srv://mou:blogDB@myfirstcluster.ruhmc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const dbUrl = process.env.MONGODB
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
 const connection = mongoose.connection
