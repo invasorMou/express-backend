@@ -1,6 +1,6 @@
 let express = require('express')
 let router = express.Router()
-let Post = require('../post.model')
+let Post = require('../models/post.model')
 
 //ACTIONS GET, POST, PUT, DELETE
 
@@ -35,7 +35,7 @@ router.put('/:id', function(req, res) {
   let { title, content } = req.body
   
   Post.findById(req.params.id).update({ title, content })
-    .then(post => res.json(post))
+    .then(post => res.json({ data: 'Post updated' }))
     .catch(err => res.json(err))
 })
 

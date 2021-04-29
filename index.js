@@ -1,8 +1,9 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const port = process.env.PORT
+const port = process.env.PORT || 3001
 const mongoose = require('mongoose')
+require('dotenv').config()
 
 //ROUTERS
 let home = require('./routers/home')
